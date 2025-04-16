@@ -43,20 +43,31 @@ func CheckifSorted(nums []int, asc bool) (bool, bool) {
 
 func RotateLeft(nums []int, time int) {
 
-	count := time
-	for count > 0 {
-		first := nums[0]
-		for i := 0; i < len(nums)-1; i++ {
-			nums[i] = nums[i+1]
-		}
-		nums[len(nums)-1] = first
-		count--
-	}
+	//O(N)
+	n := len(nums)
+	time %= n
+	result := append(nums[time:], nums[:time]...)
+	copy(nums, result)
 	fmt.Println(nums)
+
+	/*
+
+		O(N * time)
+			count := time
+			for count > 0 {
+				first := nums[0]
+				for i := 0; i < len(nums)-1; i++ {
+					nums[i] = nums[i+1]
+				}
+				nums[len(nums)-1] = first
+				count--
+			}
+			fmt.Println(nums)*/
 }
 
 func MoveAllZeroesToEnd(nums []int) {
 
+	//O(N)
 	pos := 0
 	for i := 0; i < len(nums); i++ {
 		if nums[i] != 0 {
@@ -65,7 +76,11 @@ func MoveAllZeroesToEnd(nums []int) {
 		}
 	}
 
-	fmt.Println(pos)
+	for i := pos; i < len(nums); i++ {
+		nums[i] = 0
+	}
+
+	//O(N * LOG(N) + N * zeroes)
 	/*
 		zeroes := 0
 		for _, v := range nums {
@@ -90,16 +105,26 @@ func MoveAllZeroesToEnd(nums []int) {
 
 func RotateRight(nums []int, time int) {
 
-	count := time
-	for count > 0 {
-		last := nums[len(nums)-1]
-		for i := len(nums) - 1; i > 0; i-- {
-			nums[i] = nums[i-1]
-		}
-		nums[0] = last
-		count--
-	}
+	//O(N)
+	n := len(nums)
+	time %= n
+	result := append(nums[time:], nums[:n-time]...)
+	copy(nums, result)
 	fmt.Println(nums)
+
+	/*
+
+		//O(time * N)
+			count := time
+			for count > 0 {
+				last := nums[len(nums)-1]
+				for i := len(nums) - 1; i > 0; i-- {
+					nums[i] = nums[i-1]
+				}
+				nums[0] = last
+				count--
+			}
+			fmt.Println(nums)*/
 }
 
 func PrintArray(nums []int) {
