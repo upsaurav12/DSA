@@ -2,7 +2,6 @@ package array
 
 import (
 	"fmt"
-	"sort"
 )
 
 func FindMinandMaxElements(nums []int) (int, int) {
@@ -57,24 +56,35 @@ func RotateLeft(nums []int, time int) {
 }
 
 func MoveAllZeroesToEnd(nums []int) {
-	zeroes := 0
-	for _, v := range nums {
-		if v == 0 {
-			zeroes++
+
+	pos := 0
+	for i := 0; i < len(nums); i++ {
+		if nums[i] != 0 {
+			nums[pos] = nums[i]
+			pos++
 		}
 	}
 
-	sort.Ints(nums)
-
-	count := zeroes
-	for count > 0 {
-		first := nums[0]
-		for i := 0; i < len(nums)-1; i++ {
-			nums[i] = nums[i+1]
+	fmt.Println(pos)
+	/*
+		zeroes := 0
+		for _, v := range nums {
+			if v == 0 {
+				zeroes++
+			}
 		}
-		nums[len(nums)-1] = first
-		count--
-	}
+
+		sort.Ints(nums)
+
+		count := zeroes
+		for count > 0 {
+			first := nums[0]
+			for i := 0; i < len(nums)-1; i++ {
+				nums[i] = nums[i+1]
+			}
+			nums[len(nums)-1] = first
+			count--
+		}*/
 	fmt.Println(nums)
 }
 
